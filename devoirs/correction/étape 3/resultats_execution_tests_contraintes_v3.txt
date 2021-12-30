@@ -1,0 +1,106 @@
+-- Résultats de l'exécution des ordres de tests_contraintes_v1.sql sur la BD SPORTS21_BDA_v3
+-- Jean-François Condotta - 2021
+
+
+*** Test SPORT 1 - Contrainte UNIQUE sur id_sport de SPORT ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:7: ERROR:  Deux tuples de SPORT ne peuvent pas avoir même valeur pour id_sport !
+CONTEXT:  PL/pgSQL function test_sport_ar_iu() line 9 at RAISE
+
+*** Test SPORT 2 - Contrainte NOT NULL sur id_sport de SPORT ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:9: ERROR:  id_sport de SPORT ne peut pas être NULL !
+CONTEXT:  PL/pgSQL function test_sport_br_iu() line 4 at RAISE
+
+*** Test SPORT 3 - Contrainte UNIQUE sur nom_sport de SPORT ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:11: ERROR:  Deux tuples de SPORT ne peuvent pas avoir même valeur pour nom_sport !
+CONTEXT:  PL/pgSQL function test_sport_ar_iu() line 15 at RAISE
+
+*** Test SPORT 4 - Contrainte NOT NULL sur nom_sport de SPORT ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:13: ERROR:  nom_sport de SPORT ne peut pas être NULL !
+CONTEXT:  PL/pgSQL function test_sport_br_iu() line 7 at RAISE
+
+*** Test SPORT 5 - Contrainte NOT NULL sur categorie de SPORT ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:15: ERROR:  categorie de SPORT ne peut pas être NULL !
+CONTEXT:  PL/pgSQL function test_sport_br_iu() line 10 at RAISE
+
+*** Test SPORT 6 - Contrainte taille>0 sur nom_sport de SPORT ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:17: ERROR:  Taille nom_sport de SPORT doit être différente de 0 !
+CONTEXT:  PL/pgSQL function test_sport_br_iu() line 16 at RAISE
+
+*** Test SPORT 7 - Contrainte taille>0 sur categorie de SPORT ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:19: ERROR:  Taille de categorie de SPORT doit être différente de 0 !
+CONTEXT:  PL/pgSQL function test_sport_br_iu() line 19 at RAISE
+
+*** Test SPORT 8 - Contrainte id_sport>=0 sur id_sport de SPORT ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:21: ERROR:  id_sport de SPORT doit être >=0 !
+CONTEXT:  PL/pgSQL function test_sport_br_iu() line 13 at RAISE
+
+*** Test PERSONNE 1 - Contrainte UNIQUE sur id_pers de PERSONNE ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:26: ERROR:  Deux tuples de PERSONNE ne peuvent pas avoir même valeur pour id_pers !
+CONTEXT:  PL/pgSQL function test_personne_ar_iu() line 9 at RAISE
+
+*** Test PERSONNE 2 - Contrainte NOT NULL sur id_pers de PERSONNE ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:28: ERROR:  id_pers de PERSONNE ne peut pas être NULL !
+CONTEXT:  PL/pgSQL function test_personne_br_iu() line 4 at RAISE
+
+*** Test PERSONNE 3 - Contrainte UNIQUE sur (nom,prenom) de PERSONNE ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:30: ERROR:  Deux tuples de PERSONNE ne peuvent pas avoir mêmes valeurs pour nom et prénom !
+CONTEXT:  PL/pgSQL function test_personne_ar_iu() line 15 at RAISE
+
+*** Test PERSONNE 4 - Contrainte NOT NULL sur nom de PERSONNE ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:32: ERROR:  nom de PERSONNE ne peut pas être NULL !
+CONTEXT:  PL/pgSQL function test_personne_br_iu() line 7 at RAISE
+
+*** Test PERSONNE 5 - Contrainte NOT NULL sur prenom de PERSONNE ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:34: ERROR:  prenom de PERSONNE ne peut pas être NULL !
+CONTEXT:  PL/pgSQL function test_personne_br_iu() line 10 at RAISE
+
+*** Test PERSONNE 6 - Contrainte age>0 sur age de PERSONNE ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:36: ERROR:  age de PERSONNE doit être >0 !
+CONTEXT:  PL/pgSQL function test_personne_br_iu() line 13 at RAISE
+
+*** Test PERSONNE 7 - Contrainte id_pers>=0 sur id_pers de PERSONNE ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:38: ERROR:  id_pers de PERSONNE doit être >=0 !
+CONTEXT:  PL/pgSQL function test_personne_br_iu() line 16 at RAISE
+
+*** Test PRATIQUE 1 - Contrainte UNIQUE sur (id_pers,id_sport) de PRATIQUE ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:43: ERROR:  Deux tuples de PRATIQUE ne peuvent pas avoir même valeur pour id_pers et id_sport !
+CONTEXT:  PL/pgSQL function test_pratique_ar_iu() line 9 at RAISE
+
+*** Test PRATIQUE 2 - Contrainte NOT NULL sur id_pers de PRATIQUE ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:45: ERROR:  id_pers de PRATIQUE ne peut pas être NULL !
+CONTEXT:  PL/pgSQL function test_pratique_br_iu() line 4 at RAISE
+
+*** Test PRATIQUE 3 - Contrainte NOT NULL sur id_sport de PRATIQUE ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:47: ERROR:  id_sport de PRATIQUE ne peut pas être NULL !
+CONTEXT:  PL/pgSQL function test_pratique_br_iu() line 7 at RAISE
+
+*** Test PRATIQUE 4 - Contrainte nb_heures>0.0 sur nb_heures de PRATIQUE ***
+
+psql:/Users/tolosa/Cours/Cours_2021-2022/DUT2_BDA_2021/Activités_2021_2022/version1/tests_contraintes_v1.sql:49: ERROR:  nb_heures de PRATIQUE doit être >0.0 !
+CONTEXT:  PL/pgSQL function test_pratique_br_iu() line 10 at RAISE
+
+*** Test PRATIQUE 5 - Contrainte id_pers de PRATIQUE référence id_pers de PERSONNE ***
+
+INSERT 0 1
+
+*** Test PRATIQUE 6 - Contrainte id_sport de PRATIQUE référence id_sport de SPORT ***
+
+INSERT 0 1

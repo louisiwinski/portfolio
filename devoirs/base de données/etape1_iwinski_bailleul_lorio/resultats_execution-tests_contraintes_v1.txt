@@ -1,0 +1,128 @@
+-- Résultats de l'exécution des ordres de tests_contraintes_v1.sql sur la BD achats
+-- Iwinski,Bailleul,Lorio - 2021
+
+
+*** Tests client ***
+
+*** Test client 1 - Contrainte UNIQUE sur id_client de Client ***
+achats=# INSERT INTO client VALUES(7,'Test','Valentin',25);
+achats-# (7,'Test','Valentin',25);
+ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « client_pkey »
+DÉTAIL : La clé « (id_client)=(7) » existe déjà.
+
+*** Test client 2 - contrainte NOT NULL sur id_client de client ***
+achats=# INSERT INTO client VALUES(NULL,'Test','Valentin',62);
+ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « id_client » dans la relation « client »
+DÉTAIL : La ligne en échec contient (NULL, Test, Valentin, 62).
+
+*** Test client 3 - contrainte UNIQUE sur nom de client ***
+achats=# INSERT INTO client VALUES(16,'Lemsi','Marc',45);
+ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « client_nom_key »
+DÉTAIL : La clé « (nom)=(Lemsi) » existe déjà.
+
+*** Test client 4 - contrainte NOT NULL sur nom de client ***
+achats=# INSERT INTO client VALUES(16,null,'Marc',17);
+ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « nom » dans la relation « client »
+DÉTAIL : La ligne en échec contient (16, null, Marc, 17).
+
+*** Test client 5 - contrainte NOT NULL sur prenom de client ***
+achats=# INSERT INTO client VALUES(16,'Marc',NULL,5);
+ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « prenom » dans la relation « client »
+DÉTAIL : La ligne en échec contient (16, Marc, NULL, 5).
+
+*** Test client 6 - contrainte age>0 sur age de client ***
+achats=# INSERT INTO client VALUES(16,'Marc','Oracle',0);
+ERREUR:  la nouvelle ligne de la relation « client » viole la contrainte de vérification « client_age_check »
+DÉTAIL : La ligne en échec contient (16, Marc, Oracle, 0).
+
+*** Test client 7 - contrainte id_client>0 sur id_client de client ***
+achats=# INSERT INTO client VALUES(0,'Marc','Oracle',61);
+ERREUR:  la nouvelle ligne de la relation « client » viole la contrainte de vérification « client_id_client_check »
+DÉTAIL : La ligne en échec contient (0, Marc, Oracle, 61).
+
+*** Test client 8 - contrainte varchar(20) sur nom de client ***
+achats=# INSERT INTO client VALUES(0,'henrieieieiiiiiiiieiieeeeeee','Oracle',61);
+ERREUR:  valeur trop longue pour le type character varying(20)
+
+*** Test client 9 - contrainte varchar(20) sur prenom de client ***
+achats=# INSERT INTO client VALUES(0,'Oracle','henrieieieiiiiiiiieiieeeeeee',61);
+ERREUR:  valeur trop longue pour le type character varying(20)
+
+
+
+*** Tests produit ***
+
+*** Test produit 1 - Contrainte UNIQUE sur id_produit de produit ***
+achats=# INSERT INTO produit VALUES(7,'Ballon de plage',10)
+achats-# ;
+ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « produit_pkey »
+DÉTAIL : La clé « (id_produit)=(7) » existe déjà.
+
+*** Test produit 2 - Contrainte NOT NULL sur id_produit de produit ***
+achats=# INSERT INTO produit VALUES(NULL,'Ballon',9);
+ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « id_produit » dans la relation « produit »
+DÉTAIL : La ligne en échec contient (NULL, Ballon, 9).
+
+*** Test produit 3 - Contrainte UNIQUE sur nom_produit de produit ***
+achats=# INSERT INTO produit VALUES(18,'Velo',3);
+ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « produit_nom_produit_key »
+DÉTAIL : La clé « (nom_produit)=(Velo) » existe déjà.
+
+*** Test produit 4 - Contrainte NOT NULL sur nom_produit de produit ***
+achats=# INSERT INTO produit VALUES(18,NULL,7);
+ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « nom_produit » dans la relation « produit »
+DÉTAIL : La ligne en échec contient (18, NULL, 7).
+
+*** Test produit 5 - Contrainte NOT NULL sur prix_en_euros de produit ***
+achats=# INSERT INTO produit VALUES(18,'Ballon',NULL);
+ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « prix_en_euros » dans la relation « produit »
+DÉTAIL : La ligne en échec contient (18, Ballon, NULL).
+
+*** Test produit 6 - Contrainte id_produit>0 sur id_produit de produit ***
+achats=# INSERT INTO produit VALUES(0,'Ballon',7);
+ERREUR:  la nouvelle ligne de la relation « produit » viole la contrainte de vérification « produit_id_produit_check »
+DÉTAIL : La ligne en échec contient (0, Ballon, 7).
+
+*** Test produit 7 - Contrainte prix_en_euros>=0 sur prix_en_euros de produit ***
+achats=# INSERT INTO produit VALUES(18,'Ballon',-1);
+ERREUR:  la nouvelle ligne de la relation « produit » viole la contrainte de vérification « produit_prix_en_euros_check »
+DÉTAIL : La ligne en échec contient (18, Ballon, -1).
+
+*** Test produit 8 - Contrainte varchar(50) sur nom_produit de produit ***
+achats=# INSERT INTO produit VALUES(18,'ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo',85);
+ERREUR:  valeur trop longue pour le type character varying(50)
+
+
+*** Tests achete ***
+
+*** Test achete 1 - Contrainte UNIQUE (id_client,id_produit) de achete ***
+achats=# INSERT INTO achete VALUES(1,6,15);
+ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « achete_pkey »
+DÉTAIL : La clé « (id_produit, id_client)=(6, 1) » existe déjà.
+
+*** Test achete 2 - Contrainte NOT NULL id_client de achete ***
+achats=# INSERT INTO achete VALUES(NULL,18,10);
+ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « id_client » dans la relation « achete »
+DÉTAIL : La ligne en échec contient (NULL, 18, 10).
+
+*** Test achete 3 - Contrainte NOT NULL id_produit de achete ***
+achats=# INSERT INTO achete VALUES (17,NULL,10);
+ERREUR:  une valeur NULL viole la contrainte NOT NULL de la colonne « id_produit » dans la relation « achete »
+DÉTAIL : La ligne en échec contient (17,NULL, 10).
+
+*** Test achete 4 - Contrainte id_client de achete référence id_client de client ***
+achats=# INSERT INTO achete VALUES (25,1,15);
+ERREUR:  une instruction insert ou update sur la table « achete » viole la contrainte de clé
+étrangère « achete_id_client_fkey »
+DÉTAIL : La clé (id_client)=(25) n'est pas présente dans la table « client ».
+
+*** Test achete 5 - Contrainte id_produit de achete référence id_produit de produit ***
+achats=# INSERT INTO achete VALUES (4,25,10);
+ERREUR:  une instruction insert ou update sur la table « achete » viole la contrainte de clé
+étrangère « achete_id_produit_fkey »
+DÉTAIL : La clé (id_produit)=(25) n'est pas présente dans la table « produit ».
+
+*** Test achete 6 - Contrainte points_de_fidelites_gagnes>=0 de achete ***
+achats=# INSERT INTO achete VALUES (1,5,-15);
+ERREUR:  la nouvelle ligne de la relation « achete » viole la contrainte de vérification « achete_points_de_fidelite_gagnes_check »
+DÉTAIL : La ligne en échec contient (1, 5, -15).

@@ -1,0 +1,104 @@
+-- Résultats de l'exécution des ordres de tests_contraintes_v1.sql sur la BD achats
+-- Iwinski,Bailleul,Lorio - 2021
+
+
+*** Tests client ***
+
+*** Test client 1 - Contrainte UNIQUE sur id_client de Client ***
+achats=# INSERT INTO client VALUES(7,'Test','Valentin',25);
+INSERT 0 1
+
+*** Test client 2 - contrainte NOT NULL sur id_client de client ***
+achats=# INSERT INTO client VALUES(NULL,'Test','Valentin',62);
+INSERT 0 1
+
+*** Test client 3 - contrainte UNIQUE sur nom de client ***
+achats=# INSERT INTO client VALUES(16,'Lemsi','Marc',45);
+INSERT 0 1
+
+*** Test client 4 - contrainte NOT NULL sur nom de client ***
+achats=# INSERT INTO client VALUES(16,null,'Marc',17);
+INSERT 0 1
+
+*** Test client 5 - contrainte NOT NULL sur prenom de client ***
+achats=# INSERT INTO client VALUES(16,'Marc',NULL,5);
+INSERT 0 1
+
+*** Test client 6 - contrainte age>0 sur age de client ***
+achats=# INSERT INTO client VALUES(16,'Marc','Oracle',0);
+INSERT 0 1
+
+*** Test client 7 - contrainte id_client>0 sur id_client de client ***
+achats=# INSERT INTO client VALUES(0,'Marc','Oracle',61);
+INSERT 0 1
+
+*** Test client 8 - contrainte varchar(20) sur nom de client ***
+achats=# INSERT INTO client VALUES(0,'henrieieieiiiiiiiieiieeeeeee','Oracle',61);
+INSERT 0 1
+
+*** Test client 9 - contrainte varchar(20) sur prenom de client ***
+achats=# INSERT INTO client VALUES(0,'Oracle','henrieieieiiiiiiiieiieeeeeee',61);
+INSERT 0 1
+
+
+*** Tests produit ***
+
+*** Test produit 1 - Contrainte UNIQUE sur id_produit de produit ***
+achats=# INSERT INTO produit VALUES(7,'Ballon de plage',10);
+INSERT 0 1
+
+
+*** Test produit 2 - Contrainte NOT NULL sur id_produit de produit ***
+achats=# INSERT INTO produit VALUES(NULL,'Ballon',9);
+INSERT 0 1
+
+*** Test produit 3 - Contrainte UNIQUE sur nom_produit de produit ***
+achats=# INSERT INTO produit VALUES(18,'Velo',3);
+INSERT 0 1
+
+*** Test produit 4 - Contrainte NOT NULL sur nom_produit de produit ***
+achats=# INSERT INTO produit VALUES(18,NULL,7);
+INSERT 0 1
+
+*** Test produit 5 - Contrainte NOT NULL sur prix_en_euros de produit ***
+achats=# INSERT INTO produit VALUES(18,'Ballon',NULL);
+INSERT 0 1
+
+*** Test produit 6 - Contrainte id_produit>0 sur id_produit de produit ***
+achats=# INSERT INTO produit VALUES(0,'Ballon',7);
+INSERT 0 1
+
+*** Test produit 7 - Contrainte prix_en_euros>=0 sur prix_en_euros de produit ***
+achats=# INSERT INTO produit VALUES(18,'Ballon',-1);
+INSERT 0 1
+
+*** Test produit 8 - Contrainte varchar(50) sur nom_produit de produit ***
+achats=# INSERT INTO produit VALUES(18,'ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo',85);
+INSERT 0 1
+
+
+*** Tests achete ***
+
+*** Test achete 1 - Contrainte UNIQUE (id_client,id_produit) de achete ***
+achats=# INSERT INTO achete VALUES(1,6,15);
+INSERT 0 1
+
+*** Test achete 2 - Contrainte NOT NULL id_client de achete ***
+achats=# INSERT INTO achete VALUES(NULL,18,10);
+INSERT 0 1
+
+*** Test achete 3 - Contrainte NOT NULL id_produit de achete ***
+achats=# INSERT INTO achete VALUES (17,NULL,10);
+INSERT 0 1
+
+*** Test achete 4 - Contrainte id_client de achete référence id_client de client ***
+achats=# INSERT INTO achete VALUES (25,1,15);
+INSERT 0 1
+
+*** Test achete 5 - Contrainte id_produit de achete référence id_produit de produit ***
+achats=# INSERT INTO achete VALUES (4,25,10);
+INSERT 0 1
+
+*** Test achete 6 - Contrainte points_de_fidelites_gagnes>=0 de achete ***
+achats=# INSERT INTO achete VALUES (1,5,-15);
+INSERT 0 1

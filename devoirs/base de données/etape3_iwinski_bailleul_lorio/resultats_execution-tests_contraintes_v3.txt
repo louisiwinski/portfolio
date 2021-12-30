@@ -1,0 +1,155 @@
+-- Résultats de l'exécution des ordres de tests_contraintes_v1.sql sur la BD achats
+-- Iwinski,Bailleul,Lorio - 2021
+
+
+*** Tests client ***
+
+*** Test client 1 - Contrainte UNIQUE sur id_client de Client ***
+achats=# INSERT INTO client VALUES(7,'Test','Valentin',25);
+ERREUR:  deux tuples de client(id_client) ne peuvent pas avoir la m^me valeur
+CONTEXTE : fonction PL/pgSQL test_client_after_iu(), ligne 9 à RAISE
+
+
+*** Test client 2 - contrainte NOT NULL sur id_client de client ***
+achats=# INSERT INTO client VALUES(NULL,'Test','Valentin',62);
+ERREUR:  id_client de client ne peut pas ^tre NULL
+CONTEXTE : fonction PL/pgSQL test_client_before_iu(), ligne 4 à RAISE
+
+
+*** Test client 3 - contrainte UNIQUE sur nom de client ***
+achats=# INSERT INTO client VALUES(78,'Test','Henry',45);
+ERREUR:  deux tuples de client(nom) ne peuvent pas avoir la m^me valeur
+CONTEXTE : fonction PL/pgSQL test_client_after_iu(), ligne 15 à RAISE
+
+
+*** Test client 4 - contrainte NOT NULL sur nom de client ***
+achats=# INSERT INTO client VALUES(16,null,'Marc',17);
+ERREUR:  nom de client ne peut pas ^tre NULL
+CONTEXTE : fonction PL/pgSQL test_client_before_iu(), ligne 7 à RAISE
+
+
+*** Test client 5 - contrainte NOT NULL sur prenom de client ***
+achats=# INSERT INTO client VALUES(16,'Marc',NULL,5);
+ERREUR:  prenom de client ne peut pas ^tre NULL
+CONTEXTE : fonction PL/pgSQL test_client_before_iu(), ligne 10 à RAISE
+
+
+*** Test client 6 - contrainte age>0 sur age de client ***
+achats=# INSERT INTO client VALUES(16,'Marc','Oracle',0);
+ERREUR:  age de client doit ^tre >0
+CONTEXTE : fonction PL/pgSQL test_client_before_iu(), ligne 13 à RAISE
+
+
+*** Test client 7 - contrainte id_client>0 sur id_client de client ***
+achats=# INSERT INTO client VALUES(0,'Marc','Oracle',61);
+ERREUR:  id_client de client doit ^tre >0
+CONTEXTE : fonction PL/pgSQL test_client_before_iu(), ligne 16 à RAISE
+
+
+*** Test client 8 - contrainte varchar(20) sur nom de client ***
+achats=# INSERT INTO client VALUES(74,'','Oracle',61);
+ERREUR:  taille de nom de client doit être différente de 0
+CONTEXTE : fonction PL/pgSQL test_client_before_iu(), ligne 19 à RAISE
+
+
+*** Test client 9 - contrainte varchar(20) sur prenom de client ***
+achats=# INSERT INTO client VALUES(52,'Oracle','',61);
+ERREUR:  taille de prenom de client doit être différente de 0
+CONTEXTE : fonction PL/pgSQL test_client_before_iu(), ligne 22 à RAISE
+
+
+*** Test client 10 - contrainte UNIQUE sur prenom de client ***
+achats=# INSERT INTO client VALUES(98,'Daniel','Mai',61);
+ERREUR:  deux tuples de client(prenom) ne peuvent pas avoir la m^me valeur
+CONTEXTE : fonction PL/pgSQL test_client_after_iu(), ligne 21 à RAISE
+
+
+*** Tests produit ***
+
+*** Test produit 1 - Contrainte UNIQUE sur id_produit de produit ***
+achats=# INSERT INTO produit VALUES(7,'Ballon de plage',10);
+ERREUR:  Deux tuples (pour id_produit) de Produit ne peuvent pas avoir la m^me valeur
+CONTEXTE : fonction PL/pgSQL test_produit_after_iu(), ligne 9 à RAISE
+
+
+*** Test produit 2 - Contrainte NOT NULL sur id_produit de produit ***
+achats=# INSERT INTO produit VALUES(NULL,'Ballon',9);
+ERREUR:  id_produit de Produit ne peut pas ^tre NULL
+CONTEXTE : fonction PL/pgSQL test_produit_before_iu(), ligne 4 à RAISE
+
+
+*** Test produit 3 - Contrainte UNIQUE sur nom_produit de produit ***
+achats=# INSERT INTO produit VALUES(18,'Velo',3);
+ERREUR:  Deux tuple (pour nom_produit) ne peuvent pas avoir la même valeur
+CONTEXTE : fonction PL/pgSQL test_produit_after_iu(), ligne 15 à RAISE
+
+
+*** Test produit 4 - Contrainte NOT NULL sur nom_produit de produit ***
+achats=# INSERT INTO produit VALUES(18,NULL,7);
+ERREUR:  nom_produit de Produit ne peut pas ^tre NULL
+CONTEXTE : fonction PL/pgSQL test_produit_before_iu(), ligne 7 à RAISE
+
+
+*** Test produit 5 - Contrainte NOT NULL sur prix_en_euros de produit ***
+achats=# INSERT INTO produit VALUES(18,'Ballon',NULL);
+ERREUR:  prix_en_euros de Produit ne peut pas ^tre NULL
+CONTEXTE : fonction PL/pgSQL test_produit_before_iu(), ligne 10 à RAISE
+
+
+*** Test produit 6 - Contrainte id_produit>0 sur id_produit de produit ***
+achats=# INSERT INTO produit VALUES(0,'Ballon',7);
+ERREUR:  id_produit de Produit doit ^tre >0
+CONTEXTE : fonction PL/pgSQL test_produit_before_iu(), ligne 13 à RAISE
+
+
+*** Test produit 7 - Contrainte prix_en_euros>=0 sur prix_en_euros de produit ***
+achats=# INSERT INTO produit VALUES(18,'Ballon',-1);
+ERREUR:  prix_en_euros de Produit doit ^tre >=0
+CONTEXTE : fonction PL/pgSQL test_produit_before_iu(), ligne 19 à RAISE
+
+
+
+*** Tests achete ***
+
+*** Test achete 1 - Contrainte UNIQUE (id_client,id_produit) de achete ***
+achats=# INSERT INTO achete VALUES(1,6,15);
+ERREUR:  deux tuples de achete(id_client) ne peuvent pas avoir la m^me valeur
+CONTEXTE : fonction PL/pgSQL test_achete_after_iut(), ligne 9 à RAISE
+
+
+*** Test achete 2 - Contrainte NOT NULL id_client de achete ***
+achats=# INSERT INTO achete VALUES(NULL,18,10);
+ERREUR:  id_client de achete ne peut pas ^tre NULL
+CONTEXTE : fonction PL/pgSQL test_achete_before_iu(), ligne 4 à RAISE
+
+
+*** Test achete 3 - Contrainte NOT NULL id_produit de achete ***
+achats=# INSERT INTO achete VALUES (17,NULL,10);
+ERREUR:  id_produit de achete ne peut pas ^tre NULL
+CONTEXTE : fonction PL/pgSQL test_achete_before_iu(), ligne 7 à RAISE
+
+
+*** Test achete 4 - Contrainte id_client de achete référence id_client de client ***
+achats=# INSERT INTO achete VALUES (25,1,15);
+INSERT 0 1
+
+*** Test achete 4 #2 - Contrainte id_client de achete référence id_client de client ***
+achats=# INSERT INTO achete VALUES (25,1,15);
+ERREUR:  deux tuples de achete(id_client) ne peuvent pas avoir la m^me valeur
+CONTEXTE : fonction PL/pgSQL test_achete_after_iut(), ligne 9 à RAISE
+
+
+*** Test achete 5 - Contrainte id_produit de achete référence id_produit de produit ***
+achats=# INSERT INTO achete VALUES (4,25,10);
+INSERT 0 1
+
+*** Test achete 5 - Contrainte id_produit de achete référence id_produit de produit ***
+achats=# INSERT INTO achete VALUES (8,25,10);
+ERREUR:  deux tuples de achete(id_produit) ne peuvent pas avoir la m^me valeur
+CONTEXTE : fonction PL/pgSQL test_achete_after_iut(), ligne 15 à RAISE
+
+
+*** Test achete 6 - Contrainte points_de_fidelites_gagnes>=0 de achete ***
+achats=# INSERT INTO achete VALUES (1,5,-15);
+ERREUR:  points_de_fidelite_gagnes de achete ne peut pas ^tre NULL
+CONTEXTE : fonction PL/pgSQL test_achete_before_iu(), ligne 10 à RAISE
